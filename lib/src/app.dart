@@ -1,49 +1,28 @@
+import 'package:first_app/src/screens/second.dart';
 import 'package:flutter/material.dart';
 
-class MyTextField extends StatefulWidget {
-  @override
-  _MyTextFieldState createState() => _MyTextFieldState();
+class App extends StatefulWidget {
+  _AppState createState() => _AppState();
 }
 
-class _MyTextFieldState extends State<MyTextField> {
-  List<String> _strings = [];
-  final TextEditingController _controller = TextEditingController();
-  String string = '';
-
+class _AppState extends State<App> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('TextField App'),
+        title: Text('Navigation App'),
       ),
-      body: Container(
-        padding: EdgeInsets.all(20.0),
-        child: Column(
-          children: <Widget>[
-            TextField(
-              // Add a controller
-              controller: _controller,
-              decoration: InputDecoration(hintText: 'Type in here...'),
-              onSubmitted: (value) => {
-                setState(() {
-                  _strings.add(value);
-                  // Clear the TextField
-                  _controller.clear();
-                })
-              },
-              style: TextStyle(
-                fontSize: 20.0,
-                color: Colors.blue,
-              ),
-            ),
-            Text('You typed in here...'),
-            for (var string in _strings) Text(string),
-            // Add a divider
-            Divider(
-              height: 20.0,
-              color: Colors.blue,
-            ),
-          ],
+      body: Center(
+        child: MaterialButton(
+          color: Colors.blue,
+          textColor: Colors.white,
+          child: Text('Go to second screen'),
+          onPressed: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => Second(title: 'Second')),
+            );
+          },
         ),
       ),
     );

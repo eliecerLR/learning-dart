@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 
 void main() => runApp(
       MaterialApp(
-        title: 'TextField App',
-        home: MyTextField(),
+        title: 'Mavigation App',
+        home: App(),
       ),
     );
