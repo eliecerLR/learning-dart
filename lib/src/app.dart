@@ -1,44 +1,47 @@
 import 'package:flutter/material.dart';
 
-class MyButton extends StatefulWidget {
+class MyTextField extends StatefulWidget {
   @override
-  _MyButtonState createState() => _MyButtonState();
+  _MyTextFieldState createState() => _MyTextFieldState();
 }
 
-class _MyButtonState extends State<MyButton> {
-  String text = 'Payaso';
-  int index = 0;
-  List<String> texts = ['Tonto', 'Feo', 'Gordo'];
+class _MyTextFieldState extends State<MyTextField> {
+  List<String> _strings = [];
+  final TextEditingController _controller = TextEditingController();
+  String string = '';
 
-  void changeText() {
-    setState(() {
-      text = texts[index];
-      index = index + 1;
-      if (index == 3) {
-        index = 0;
-      }
-    });
-  }
-
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('StatefullApp'),
+        title: Text('TextField App'),
       ),
-      body: Center(
+      body: Container(
+        padding: EdgeInsets.all(20.0),
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Text(
-              'Hector es $text',
-              style: TextStyle(fontSize: 18),
-            ),
-            Padding(padding: EdgeInsets.all(10)),
-            ElevatedButton(
-              onPressed: () {
-                changeText();
+          children: <Widget>[
+            TextField(
+              // Add a controller
+              controller: _controller,
+              decoration: InputDecoration(hintText: 'Type in here...'),
+              onSubmitted: (value) => {
+                setState(() {
+                  _strings.add(value);
+                  // Clear the TextField
+                  _controller.clear();
+                })
               },
-              child: Text('Click me'),
+              style: TextStyle(
+                fontSize: 20.0,
+                color: Colors.blue,
+              ),
+            ),
+            Text('You typed in here...'),
+            for (var string in _strings) Text(string),
+            // Add a divider
+            Divider(
+              height: 20.0,
+              color: Colors.blue,
             ),
           ],
         ),
